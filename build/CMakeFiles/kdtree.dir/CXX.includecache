@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+.././include/kdtree.h
+stdio.h
+-
+
+/home/ubuntu/hybrid_a_star/src/kdtree.cpp
+kdtree.h
+-
+algorithm
+-
+vector
+-
+cmath
+-
+tuple
+-
+unordered_map
+-
+stack
+-
+queue
+-
+cstring
+-
+cassert
+-
+cstdlib
+-
+iostream
+-
+
