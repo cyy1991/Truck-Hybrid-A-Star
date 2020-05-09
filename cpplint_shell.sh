@@ -3,12 +3,12 @@ echo "^@^cpplint code style check through shell====^"
 index=0
 config=""
 pwd_path=`pwd`
-cpplint_path="pwd_path/cpplint.py"
+cpplint_path="$pwd_path/cpplint.py"
 echo cpplint_path=$cpplint_path
 
 src_path="$pwd_path/src"
 echo src_path=$src_path 
-for file in `find $src_path -name "*.h" -type f | grep -E "\.h$|\.cc$|\.cu$|\.cpp$"`
+for file in `find $src_path -maxdepth 1 -type f | grep -E "\.h$|\.cc$|\.cu$|\.cpp$"`
 do 
     echo file=$file 
     echo -e "\033[36m ===> [FILE] \033[0m \033[47;31m $file \033[0m"
