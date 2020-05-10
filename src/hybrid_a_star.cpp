@@ -149,18 +149,31 @@ bool hybrid_a_star_planning(double sx, double sy, double syaw, double syaw1,
 
     // TODO: add the function    
     // double h_dp = calc_holonomic_with_obstacle_heuristic();
-    
-
-
-
-
-
 
     return true;
 }
+/**
+ *@brief: return  the discrete motion inputs
+ *@return: motion inputs of the steer angle 
+ */ 
 
-void calc_motion_inputs() {
+ std::vector<std::pair<double, double>> calc_motion_inputs() {
+    double steer_reso = MAX_STEER / N_STEER;
+    std::vector<std::pair<double, double>> motion_inputs; 
+    std::vector<double> up 
+    for (double st = steer_reso ; st <= MAX_STEER; st += steer_reso) {
+        up.push_back(st);
+    }
+    up.push_front(0.0);   // add zero steer angle situation
+    for (int i = 0; i < 2 * up.size() - 1; ++i) {
+        if (i < up.size()) {
+            motion_inputs.push_back(std::make_pair(up[i], 1.0));
+        } else {
+            motion_inputs.push_back(std::make_pair(up[i], -1.0));
+        }
+    }
 
+    return motion_inputs;
 }
 
 // bool verify_index(Node3d* node, Config c, std::vector<double> ox,
@@ -197,7 +210,8 @@ void calc_motion_inputs() {
 
 
 int main(int argc, char* argv[]) {
-    std::cout << "Hybrid A star begins:  " << std::endl;
+    std::cout << "Hybrid A star for truck trailer begins:" << std::endl;
+    double sx = 14.0, sy = 10.0; 
     return 0;
 }
 
