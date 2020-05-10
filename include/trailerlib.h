@@ -4,16 +4,18 @@
 	> Mail: yongyu.chen@tum.de
 	> Created Time: 2018
  ************************************************************************/
-//  Vehicle parameter
-# include <iostream>
-# include <algorithm>
+#include <iostream>
+#include <algorithm>
 #include <vector>
 #include <matplotlibcpp.h>
+#include "kdtree.h"
+
 
 using namespace std;
 namespace plt = matplotlibcpp;
 
-// TODO: add check collision function 
+typedef std::vector<std::vector<double>> vector_of_vectors_t;
+typedef KDTreeVectorOfVectorsAdaptor<vector_of_vectors_t, double> kd_tree_t;
 
 // for quick implementation, set all variables as public, todo... 
 
@@ -380,4 +382,37 @@ class TruckTrailer {
 		plt::show();
 
      }
+	 /**
+      * @brief: calc trailer yaw list from x, y, yaw lists
+      * @return: trailer yaw list
+      */ 
+	 vector<double> calc_trailer_yaw_from_xyyaw(std::vector<double> x,
+									std::vector<double> y, 
+									std::vector<double> yaw, 
+									doubble init_tyaw, 
+									std::vector<double> steps) {
+		vector<double> tyaw(x.size(), 0.0);
+		tyaw[0] = init_tyaw;
+		for (size_t i = 1; i < x.size(); ++i) {
+			tyaw[i] += tyaw[i - 1] + steps[i - 1] / LT * std:: sin(yaw[i - 1] - tyaw[i - 1]);
+		}
+		return tyaw;  								
+	}
+	/**
+	 * @brief: use motion model to predict the next state
+	 * @ref: http://planning.cs.uiuc.edu/node661.html#77556
+	 */ 
+	std::vector<double> trailer_motion_model(double x, double y, 
+							double yaw0, double yaw1, double delta) {
+
+		return {x + D * std::cos(yaw0), y + D * std::sin(yaw0), 
+				yaw0 + D / L * std::tan(delta), yaw1 + D / d * std::sin(yaw0 - yaw1)};						
+	}
+
+    bool rect_check(double ix, double iy, double iyaw, std::vector<double>& ox, 
+				    std::vector<double>& oy, std::vector<double>& oy, 
+					) {
+
+	}
+
 };

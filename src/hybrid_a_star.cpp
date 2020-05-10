@@ -46,8 +46,8 @@ using namespace nanoflann;
 #define MAX_STEER 0.6 
 
 
-typedef std::vector<std::vector<double>> vector_of_vectors_t;
-typedef KDTreeVectorOfVectorsAdaptor<vector_of_vectors_t, double> kd_tree_t;
+// intialize the truck trailer model as global variable
+TruckTrailer truck_trailer;   
 
 double mod2pi(double x) {
     double v = std::fmod(x, 2 * M_PI);
