@@ -46,7 +46,6 @@ using namespace nanoflann;
 #define MAX_STEER 0.6 
 
 
-
 typedef std::vector<std::vector<double>> vector_of_vectors_t;
 typedef KDTreeVectorOfVectorsAdaptor<vector_of_vectors_t, double> kd_tree_t;
 
@@ -175,6 +174,58 @@ bool hybrid_a_star_planning(double sx, double sy, double syaw, double syaw1,
 
     return motion_inputs;
 }
+
+/**
+ *@brief: calculate the rs path cost based on different criteria
+ *@return: the total cost of a path 
+ */ 
+double calc_rs_path_cost(ReedSheppPath* rspath, double yaw1) {
+    double cost = 0.0;
+    // 1. length cost 
+    for (size_t i = 0; i < rspath->segs_lengths.size(); ++i) {
+        if (rspath->segs_lengths[i] >= 0) { // forward
+            cost += l;
+        } else {
+            cost += abs(l) * BACK_COST;
+        }
+    }
+    // 2. switch back penalty
+    for (size_t i = 0; i < rspath->segs_lengths.size() - 1; ++i) {
+        if (rspath->segs_lengths[i] * rspath->segs_lengths[i + 1] < 0.0) {
+            cost += SB_COST;
+        }
+    }
+
+    // 3. steer penalty 
+    for (size_t i = 0; i < rspath->segs_types.size(); ++i) {
+        if (rspath->segs_types[i] != 'S') { // curve
+            cost += STEER_COST * abs(MAX_STEER);
+        }
+    }
+    // 4. steer change penalty
+    int nctypes = rspath->segs_types.size();
+    vector<double> ulist(nctypes, 0.0);
+    for (size_t i = 0; i < rspath->segs_types.size(); ++i) {
+        if (rspath->segs_types[i] == 'R') {
+            ulist[i] = - MAX_STEER;
+        } else if (rspath->segs_types[i] == 'L') {
+            ulist[i] = MAX_STEER;
+        }
+    }
+    for (size_t i = 0; i < rspath->segs_types.size() - 1; ++i) {
+        cost += STEER_CHANGE_COST * std::abs(ulist[i + 1] - ulist[i]);
+    }
+    // 5. jacknife cost 
+    double yaw_diff_sum = 0.0;
+    for (size_t i = 0; i < rspath->phi.size(); ++i) {
+        yaw_diff_sum +=  abs(mod2pi(rspath->phi[i] - yaw1));
+    }
+    cost += JACKKNIF_COST * yaw_diff_sum;
+
+
+    return cost; 
+}
+
 
 // bool verify_index(Node3d* node, Config c, std::vector<double> ox,
 //                   std::vector<double> oy, double inityaw1, kd_tree_t) {
