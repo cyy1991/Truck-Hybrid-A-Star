@@ -226,6 +226,21 @@ double calc_rs_path_cost(ReedSheppPath* rspath, double yaw1) {
     return cost; 
 }
 
+ReedSheppPath analytic_expantion(Node3d* current, Node3d* ngoal, 
+                                Config& config,  std::vector<double>& ox, 
+                                std::vector<double>& oy, kd_tree_t& kdtree) {
+    double max_curvature = tan(MAX_STEER) / WB; 
+    std::vector<ReedShepp::ReedSheppPath> paths;
+    double start_node[3] = {current->xlist.back(), current->ylist.back(), current->yawlist.back()}；
+    double end_node[3] = {ngoal->xlist.back(), ngoal->xlist.back(), ngoal->yawlist.back()};
+    if (! ReedShepp::GenerateRSPs(start_node, end_node, &paths)) {
+        std::cout << "Fail to generate different combination of Reed Shepp" << std::endl;
+    }
+    
+    return path[0];
+
+}
+
 
 // bool verify_index(Node3d* node, Config c, std::vector<double> ox,
 //                   std::vector<double> oy, double inityaw1, kd_tree_t) {
