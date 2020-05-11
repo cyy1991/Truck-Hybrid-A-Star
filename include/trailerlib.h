@@ -16,6 +16,28 @@ namespace plt = matplotlibcpp;
 
 typedef std::vector<std::vector<double>> vector_of_vectors_t;
 typedef KDTreeVectorOfVectorsAdaptor<vector_of_vectors_t, double> kd_tree_t;
+ 
+// For Collision Checking  
+struct Point {
+	double x;
+	double y;
+	Point(double _x, double _y) {
+		x = _x;
+		y = _y;
+	}
+};
+/**
+ * @brief: cross product of |P1P2| X |P1P|
+ */  
+double CrossProduct(const Point& p1, const Point& p2, const Point& p) {
+	return (p2.x - p1.x) * (p2.y - p1.y) * (p.x - p1.x) * (p.y - p1.y);
+}
+
+bool IsPointInRec(const Point& p, const Point& a, const Point& b, 
+				  const Point& c, const Point& d) {
+	return CrossProduct(a, d, p) * CrossProduct(c, b, p) >= 0 && 
+		   CrossProduct(d, c, p) * CrossProduct(b, a, p) >= 0;				  
+}
 
 // for quick implementation, set all variables as public, todo... 
 
@@ -408,10 +430,18 @@ class TruckTrailer {
 		return {x + D * std::cos(yaw0), y + D * std::sin(yaw0), 
 				yaw0 + D / L * std::tan(delta), yaw1 + D / d * std::sin(yaw0 - yaw1)};						
 	}
-
+    // TDOO: write test for this function
     bool rect_check(double ix, double iy, double iyaw, std::vector<double>& ox, 
-				    std::vector<double>& oy, std::vector<double>& oy, 
-					) {
+				    std::vector<double>& oy, std::vector<double>& vrx, 
+					std::vector<double>& vry) {
+		double c = cos(-iyaw), s = sin(-iyaw);
+		// iterate the obstacles and convert them to vehicle frame 
+		for (int i = 0; i < ox.size(); ++i) {
+			double tx = ox[i] - ix;
+			double ty = oy[i] - iy;
+			Point ob(c * tx - s * ty, s * tx + c * ty);
+		}
+		return true;  
 
 	}
 
