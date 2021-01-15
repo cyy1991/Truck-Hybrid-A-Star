@@ -1,5 +1,6 @@
 #include "reeds_shepp_wrapper.h"
 #include <iostream>
+
 // define the path sampling callback 
 // int PathSamplingCb(double q[3], void* user_data) {
 //    std::vector<double> q_temp{q[0], q[1], q[2]};
@@ -19,6 +20,7 @@
     
 // }
 // int PathTypeCb(int t, void* user_data) {}
+
 ReedsSheppWrapper::ReedsSheppWrapper(double q0[3], double q1[3],
                                     double turnings_radius) {
     thisptr =  new ReedsSheppStateSpace(turnings_radius);

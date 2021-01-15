@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -32,7 +32,7 @@ numpy/arrayobject.h
 opencv2/opencv.hpp
 -
 
-/home/ubuntu/hybrid_a_star/src/grid_a_star.cpp
+/home/ubuntu/Truck-Hybrid-A-Star/src/grid_a_star.cpp
 iostream
 -
 limits

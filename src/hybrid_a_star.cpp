@@ -15,10 +15,12 @@
 #include "kdtree.h"
 #include "reeds_shepp.h"
 #include "reeds_shepp_wrapper.h"
+#include "reeds_shepp_path.h"
 #include "configure.h"
 #include "node3d.h"
 #include "vehicle.h"
 #include "trailerlib.h"
+#include "nanoflann.hpp"
 
 
 using namespace std;
@@ -45,6 +47,8 @@ using namespace nanoflann;
 #define LT 8.0  
 #define MAX_STEER 0.6 
 
+typedef KDTreeVectorOfVectorsAdaptor<vector_of_vectors_t, double> kd_tree_t;
+
 
 // intialize the truck trailer model as global variable
 TruckTrailer truck_trailer;   
@@ -58,6 +62,7 @@ double mod2pi(double x) {
     }
     return v;  
 }
+// TODO: replace it with gridmap or costmap2d
 /**
  *@brief: contruct the obstacles map
  */ 
@@ -149,6 +154,10 @@ bool hybrid_a_star_planning(double sx, double sy, double syaw, double syaw1,
     // TODO: add the function    
     // double h_dp = calc_holonomic_with_obstacle_heuristic();
 
+    while (true) {
+
+    }
+
     return true;
 }
 /**
@@ -159,11 +168,11 @@ bool hybrid_a_star_planning(double sx, double sy, double syaw, double syaw1,
  std::vector<std::pair<double, double>> calc_motion_inputs() {
     double steer_reso = MAX_STEER / N_STEER;
     std::vector<std::pair<double, double>> motion_inputs; 
-    std::vector<double> up 
+    std::vector<double> up; 
     for (double st = steer_reso ; st <= MAX_STEER; st += steer_reso) {
         up.push_back(st);
     }
-    up.push_front(0.0);   // add zero steer angle situation
+    up.push_back(0.0);   // add zero steer angle situation
     for (int i = 0; i < 2 * up.size() - 1; ++i) {
         if (i < up.size()) {
             motion_inputs.push_back(std::make_pair(up[i], 1.0));
@@ -184,9 +193,9 @@ double calc_rs_path_cost(ReedSheppPath* rspath, double yaw1) {
     // 1. length cost 
     for (size_t i = 0; i < rspath->segs_lengths.size(); ++i) {
         if (rspath->segs_lengths[i] >= 0) { // forward
-            cost += l;
+            // cost += l;
         } else {
-            cost += abs(l) * BACK_COST;
+            // cost += abs(l) * BACK_COST;
         }
     }
     // 2. switch back penalty
@@ -230,17 +239,30 @@ ReedSheppPath analytic_expantion(Node3d* current, Node3d* ngoal,
                                 Config& config,  std::vector<double>& ox, 
                                 std::vector<double>& oy, kd_tree_t& kdtree) {
     double max_curvature = tan(MAX_STEER) / WB; 
-    std::vector<ReedShepp::ReedSheppPath> paths;
-    double start_node[3] = {current->xlist.back(), current->ylist.back(), current->yawlist.back()}；
-    double end_node[3] = {ngoal->xlist.back(), ngoal->xlist.back(), ngoal->yawlist.back()};
-    if (! ReedShepp::GenerateRSPs(start_node, end_node, &paths)) {
-        std::cout << "Fail to generate different combination of Reed Shepp" << std::endl;
-    }
+    std::vector<ReedSheppPath> paths;
+    // double start_node[3] = {current->xlist.back(), current->ylist.back(), current->yawlist.back()}；
+    // double end_node[3] = {ngoal->xlist.back(), ngoal->xlist.back(), ngoal->yawlist.back()};
+    // if (! ReedShepp::GenerateRSPs(start_node, end_node, &paths)) {
+    //     std::cout << "Fail to generate different combination of Reed Shepp" << std::endl;
+    // }
     
-    return path[0];
+    return paths[0];
 
 }
+Node3d* calc_next_node(Node3d* current, int c_id, double u, double d, const Config& config) {
+    double arc_l = XY_RESOLUTION * 1.5;
+    int nlist = std::floor(arc_l / MOTION_RESOLUTION) + 1;
+    std::vector<double> xlist(nlist, 0);
+    std::vector<double> ylist(nlist, 0); 
+    std::vector<double> yawlist(nlist, 0); 
+    std::vector<double> yaw1list(nlist, 0); 
 
+    xlist[1] = current->xlist.back() + d * MOTION_RESOLUTION * cos(current->yawlist.back());
+
+    // ylist[1] = current. 
+    
+
+}
 
 // bool verify_index(Node3d* node, Config c, std::vector<double> ox,
 //                   std::vector<double> oy, double inityaw1, kd_tree_t) {

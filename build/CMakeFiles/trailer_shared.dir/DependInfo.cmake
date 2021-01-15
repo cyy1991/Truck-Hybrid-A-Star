@@ -4,9 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ubuntu/hybrid_a_star/src/trailerlib.cpp" "/home/ubuntu/hybrid_a_star/build/CMakeFiles/trailer_shared.dir/src/trailerlib.cpp.o"
+  "/home/ubuntu/Truck-Hybrid-A-Star/src/trailerlib.cpp" "/home/ubuntu/Truck-Hybrid-A-Star/build/CMakeFiles/trailer_shared.dir/src/trailerlib.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
+
+# Preprocessor definitions for this target.
+set(CMAKE_TARGET_DEFINITIONS_CXX
+  "trailer_shared_EXPORTS"
+  )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

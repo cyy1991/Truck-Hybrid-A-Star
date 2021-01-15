@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -42,9 +42,9 @@ vector
 matplotlibcpp.h
 -
 
-/home/ubuntu/hybrid_a_star/src/vehicle.cpp
+/home/ubuntu/Truck-Hybrid-A-Star/src/vehicle.cpp
 vehicle.h
-/home/ubuntu/hybrid_a_star/src/vehicle.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/vehicle.h
 
 /usr/include/python3.5m/Python.h
 patchlevel.h

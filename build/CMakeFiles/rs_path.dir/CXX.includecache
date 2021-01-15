@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -48,15 +48,15 @@ vector
 cmath
 -
 
-/home/ubuntu/hybrid_a_star/src/reeds_shepp_path.cpp
+/home/ubuntu/Truck-Hybrid-A-Star/src/reeds_shepp_path.cpp
 reeds_shepp_path.h
-/home/ubuntu/hybrid_a_star/src/reeds_shepp_path.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/reeds_shepp_path.h
 iostream
 -
 
-/home/ubuntu/hybrid_a_star/src/reeds_shepp_path_test.cpp
+/home/ubuntu/Truck-Hybrid-A-Star/src/reeds_shepp_path_test.cpp
 reeds_shepp_path.h
-/home/ubuntu/hybrid_a_star/src/reeds_shepp_path.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/reeds_shepp_path.h
 iostream
 -
 matplotlibcpp.h

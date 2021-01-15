@@ -4,9 +4,9 @@
 #include <limits>
 #include <vector>
 using namespace std;
-// nodes 
+// nodes, maybe node  
 class Node3d {
-private:
+public:
     int xidx;
     int yidx;
     int yawidx; 

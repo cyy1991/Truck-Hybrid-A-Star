@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -34,7 +34,7 @@ stdexcept
 vector
 -
 
-/home/ubuntu/hybrid_a_star/src/test_kdtree.cpp
+/home/ubuntu/Truck-Hybrid-A-Star/src/test_kdtree.cpp
 nanoflann.hpp
 -
 KDTreeVectorOfVectorsAdaptor.h

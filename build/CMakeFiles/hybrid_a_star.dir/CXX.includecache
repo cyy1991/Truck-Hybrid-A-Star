@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -92,6 +92,22 @@ cassert
 iostream
 -
 
+.././include/reeds_shepp_path.h
+omp.h
+-
+limits
+-
+memory
+-
+string
+-
+utility
+-
+vector
+-
+cmath
+-
+
 .././include/reeds_shepp_wrapper.h
 reeds_shepp.h
 .././include/reeds_shepp.h
@@ -118,7 +134,7 @@ vector
 matplotlibcpp.h
 -
 
-/home/ubuntu/hybrid_a_star/src/hybrid_a_star.cpp
+/home/ubuntu/Truck-Hybrid-A-Star/src/hybrid_a_star.cpp
 nanoflann.hpp
 -
 KDTreeVectorOfVectorsAdaptor.h
@@ -136,19 +152,23 @@ unordered_map
 math.h
 -
 kdtree.h
-/home/ubuntu/hybrid_a_star/src/kdtree.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/kdtree.h
 reeds_shepp.h
-/home/ubuntu/hybrid_a_star/src/reeds_shepp.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/reeds_shepp.h
 reeds_shepp_wrapper.h
-/home/ubuntu/hybrid_a_star/src/reeds_shepp_wrapper.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/reeds_shepp_wrapper.h
+reeds_shepp_path.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/reeds_shepp_path.h
 configure.h
-/home/ubuntu/hybrid_a_star/src/configure.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/configure.h
 node3d.h
-/home/ubuntu/hybrid_a_star/src/node3d.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/node3d.h
 vehicle.h
-/home/ubuntu/hybrid_a_star/src/vehicle.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/vehicle.h
 trailerlib.h
-/home/ubuntu/hybrid_a_star/src/trailerlib.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/trailerlib.h
+nanoflann.hpp
+/home/ubuntu/Truck-Hybrid-A-Star/src/nanoflann.hpp
 
 /usr/include/python3.5m/Python.h
 patchlevel.h

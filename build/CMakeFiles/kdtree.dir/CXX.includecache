@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -10,7 +10,7 @@
 stdio.h
 -
 
-/home/ubuntu/hybrid_a_star/src/kdtree.cpp
+/home/ubuntu/Truck-Hybrid-A-Star/src/kdtree.cpp
 kdtree.h
 -
 algorithm

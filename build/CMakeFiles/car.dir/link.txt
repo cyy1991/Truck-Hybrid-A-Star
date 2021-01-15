@@ -1,1 +1,1 @@
-/usr/bin/c++      CMakeFiles/car.dir/src/vehicle.cpp.o  -o car -rdynamic -lpython3.5m 
+/usr/bin/c++    -rdynamic CMakeFiles/car.dir/src/vehicle.cpp.o  -o car -lpython3.5m 

@@ -1,1 +1,1 @@
-/usr/bin/c++      CMakeFiles/rs_path.dir/src/reeds_shepp_path.cpp.o CMakeFiles/rs_path.dir/src/reeds_shepp_path_test.cpp.o  -o rs_path -rdynamic -lpython3.5m 
+/usr/bin/c++    -rdynamic CMakeFiles/rs_path.dir/src/reeds_shepp_path.cpp.o CMakeFiles/rs_path.dir/src/reeds_shepp_path_test.cpp.o  -o rs_path -lpython3.5m 

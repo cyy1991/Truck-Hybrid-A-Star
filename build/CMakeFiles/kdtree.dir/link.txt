@@ -1,1 +1,1 @@
-/usr/bin/c++      CMakeFiles/kdtree.dir/src/kdtree.cpp.o  -o kdtree -rdynamic -lpython3.5m 
+/usr/bin/c++    -rdynamic CMakeFiles/kdtree.dir/src/kdtree.cpp.o  -o kdtree -lpython3.5m 

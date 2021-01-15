@@ -8,23 +8,34 @@
 #include <algorithm>
 #include <vector>
 #include <matplotlibcpp.h>
-#include "kdtree.h"
+// #include "kdtree.h"
 
 
 using namespace std;
 namespace plt = matplotlibcpp;
 
 typedef std::vector<std::vector<double>> vector_of_vectors_t;
-typedef KDTreeVectorOfVectorsAdaptor<vector_of_vectors_t, double> kd_tree_t;
+// typedef KDTreeVectorOfVectorsAdaptor<vector_of_vectors_t, double> kd_tree_t;
  
 // For Collision Checking  
 struct Point {
 	double x;
 	double y;
-	Point(double _x, double _y) {
+	Point() {}
+ 	Point(double _x, double _y) {
 		x = _x;
 		y = _y;
 	}
+	Point(const Point& _point) {
+		x = _point.x;
+		y = _point.y;
+	}
+	Point& operator= (const Point& _point) {
+		this->x = _point.x;
+		this->y = _point.y;
+		return *this; 
+	}
+
 };
 /**
  * @brief: cross product of |P1P2| X |P1P|
@@ -136,6 +147,9 @@ class TruckTrailer {
 		this->vryt.push_back(W / 2.0);
 		this->vryt.push_back(-W / 2.0);
 		this->vryt.push_back(-W / 2.0);  
+		// construct the vertex points for trailer part 
+		Point ta(LTF, -W / 2.0), tb(LTF, W / 2.0), tc(-LTB, W / 2.0), td(LTB, W / 2.0);
+		
 		// for collision checking of front part
 		// bubble parameter 
 		this->DF = (LF  + LB) / 2.0 - LB;
@@ -150,6 +164,8 @@ class TruckTrailer {
 		this->vryf.push_back(W / 2.0);
 		this->vryf.push_back(-W / 2.0);
 		this->vryf.push_back(-W / 2.0);
+		// construct the vertex points for front truck part
+		Point fa(LF, -W / 2.0);
      
      }
      void plot_trailer(double x, double y, double yaw, double yaw1, double steer) {
@@ -411,7 +427,7 @@ class TruckTrailer {
 	 vector<double> calc_trailer_yaw_from_xyyaw(std::vector<double> x,
 									std::vector<double> y, 
 									std::vector<double> yaw, 
-									doubble init_tyaw, 
+									double init_tyaw, 
 									std::vector<double> steps) {
 		vector<double> tyaw(x.size(), 0.0);
 		tyaw[0] = init_tyaw;
@@ -424,12 +440,12 @@ class TruckTrailer {
 	 * @brief: use motion model to predict the next state
 	 * @ref: http://planning.cs.uiuc.edu/node661.html#77556
 	 */ 
-	std::vector<double> trailer_motion_model(double x, double y, 
-							double yaw0, double yaw1, double delta) {
+	// std::vector<double> trailer_motion_model(double x, double y, 
+	// 						double yaw0, double yaw1, double delta) {
 
-		return {x + D * std::cos(yaw0), y + D * std::sin(yaw0), 
-				yaw0 + D / L * std::tan(delta), yaw1 + D / d * std::sin(yaw0 - yaw1)};						
-	}
+	// 	return {x + D * std::cos(yaw0), y + D * std::sin(yaw0), 
+	// 			yaw0 + D / L * std::tan(delta), yaw1 + D / d * std::sin(yaw0 - yaw1)};						
+	// }
     // TDOO: write test for this function
     bool rect_check(double ix, double iy, double iyaw, std::vector<double>& ox, 
 				    std::vector<double>& oy, std::vector<double>& vrx, 
