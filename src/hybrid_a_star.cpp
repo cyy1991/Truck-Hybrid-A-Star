@@ -50,6 +50,18 @@ using namespace nanoflann;
 
 typedef KDTreeVectorOfVectorsAdaptor<vector_of_vectors_t, double> kd_tree_t;
 
+struct TrailerRSPathNode {
+    ReedSheppPath rs_path; 
+    double cost;
+};
+
+struct rs_path_node_cmp {
+    bool operator() (const TrailerRSPathNode& a, const TrailerRSPathNode& b) {
+        return a.cost < b.cost;
+    }
+};
+
+
 
 // intialize the truck trailer model as global variable
 TruckTrailer truck_trailer;   
@@ -193,14 +205,14 @@ bool hybrid_a_star_planning(double sx, double sy, double syaw, double syaw1,
  *@brief: calculate the rs path cost based on different criteria
  *@return: the total cost of a path 
  */ 
-double calc_rs_path_cost(ReedSheppPath* rspath, double yaw1) {
+double calc_rs_path_cost(ReedSheppPath* rspath, std::vector<double> yaw1) {
     double cost = 0.0;
     // 1. length cost 
     for (size_t i = 0; i < rspath->segs_lengths.size(); ++i) {
         if (rspath->segs_lengths[i] >= 0) { // forward
-            // cost += l;
+            cost += rspath->segs_lengths[i];
         } else {
-            // cost += abs(l) * BACK_COST;
+            cost += abs(rspath->segs_lengths[i]) * BACK_COST;
         }
     }
     // 2. switch back penalty
@@ -232,7 +244,7 @@ double calc_rs_path_cost(ReedSheppPath* rspath, double yaw1) {
     // 5. jacknife cost 
     double yaw_diff_sum = 0.0;
     for (size_t i = 0; i < rspath->phi.size(); ++i) {
-        yaw_diff_sum +=  abs(mod2pi(rspath->phi[i] - yaw1));
+        yaw_diff_sum +=  abs(mod2pi(rspath->phi[i] - yaw1[i]));
     }
     cost += JACKKNIF_COST * yaw_diff_sum;
 
@@ -258,6 +270,8 @@ ReedSheppPath analytic_expantion(Node3d* current, Node3d* ngoal,
     if (!rs_path.GenerateRSPs(start_node, end_node, &paths)) {
         std::cout << "Fail to generate different combination of Reed Shepp" << std::endl;
     }
+    std::priority_queue<TrailerRSPathNode, std::vector<TrailerRSPathNode>, rs_path_node_cmp> pq_rspath; 
+    // pq_rspath.
     
     
     return paths[0];
