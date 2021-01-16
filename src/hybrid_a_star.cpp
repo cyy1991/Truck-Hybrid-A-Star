@@ -21,6 +21,7 @@
 #include "vehicle.h"
 #include "trailerlib.h"
 #include "nanoflann.hpp"
+#include "grid_a_star.h"
 
 
 using namespace std;
@@ -150,13 +151,17 @@ bool hybrid_a_star_planning(double sx, double sy, double syaw, double syaw1,
                             );
     Node3d* ngoal = new Node3d(int(gx / xyreso), int(gy / xyreso), int(gyaw / yawreso), true, 
                             {gx}, {gy}, {gyaw}, {gyaw1}, {true}, 0.0, NULL, 0.0, 0.0, 0.0);
+    
 
+    // initialize the open set and the closed set 
     // TODO: add the function    
     // double h_dp = calc_holonomic_with_obstacle_heuristic();
+    
+    std::vector<std::vector<double>> h_dp 
+                = calc_dist_policy(gx, gy, ox, oy, xyreso, 1.0);
+    // while (!open_pq) {
 
-    while (true) {
-
-    }
+    // }
 
     return true;
 }
@@ -238,13 +243,22 @@ double calc_rs_path_cost(ReedSheppPath* rspath, double yaw1) {
 ReedSheppPath analytic_expantion(Node3d* current, Node3d* ngoal, 
                                 Config& config,  std::vector<double>& ox, 
                                 std::vector<double>& oy, kd_tree_t& kdtree) {
-    double max_curvature = tan(MAX_STEER) / WB; 
+    double sx = current->xlist.back();
+    double sy = current->ylist.back();
+    double syaw = current->yawlist.back();                                 
+    double max_curvature = tan(MAX_STEER) / WB;
+    double gx = ngoal->xlist.back();
+    double gy = ngoal->ylist.back(); 
+    double gyaw = ngoal->yaw1list.back(); 
     std::vector<ReedSheppPath> paths;
-    // double start_node[3] = {current->xlist.back(), current->ylist.back(), current->yawlist.back()}；
-    // double end_node[3] = {ngoal->xlist.back(), ngoal->xlist.back(), ngoal->yawlist.back()};
-    // if (! ReedShepp::GenerateRSPs(start_node, end_node, &paths)) {
-    //     std::cout << "Fail to generate different combination of Reed Shepp" << std::endl;
-    // }
+    double start_node[3] = {sx, sy, syaw};
+    double end_node[3] = {gx, gy, gyaw};
+
+    ReedShepp rs_path(max_curvature);
+    if (!rs_path.GenerateRSPs(start_node, end_node, &paths)) {
+        std::cout << "Fail to generate different combination of Reed Shepp" << std::endl;
+    }
+    
     
     return paths[0];
 
@@ -260,7 +274,7 @@ Node3d* calc_next_node(Node3d* current, int c_id, double u, double d, const Conf
     xlist[1] = current->xlist.back() + d * MOTION_RESOLUTION * cos(current->yawlist.back());
 
     // ylist[1] = current. 
-    
+
 
 }
 

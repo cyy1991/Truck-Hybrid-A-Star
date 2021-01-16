@@ -15,28 +15,28 @@ public:
 // double yawreso; // [rad]
 // grid bound
 
-// config, the following should be integer  
-double minx;
-double miny;
-double minyaw;
-double minyawt;
-double maxx;
-double maxy;
-double maxyaw;
-double maxyawt;
-double xw;
-double yw;
-double yaww;
-double yawtw;
+// TODO: rename the following variables
+int minx; // rename to minCellX 
+int miny;
+int minyaw;
+int minyawt;
+int maxx;
+int maxy;
+int maxyaw;
+int maxyawt;
+int xw;
+int yw;
+int yaww;
+int yawtw;
 
 // the following should be double 
 double xyreso;
 double yawreso;
 
 
-Config(double minx, double miny, double minyaw, double minyawt, 
-       double maxx, double maxy, double maxyaw, double maxyawt, 
-       double xw, double yw, double yaww, double yawtw, 
+Config(int minx, int miny, int minyaw, int minyawt, 
+       int maxx, int maxy, int maxyaw, int maxyawt, 
+       int xw, int yw, int yaww, int yawtw, 
        double xyreso, double yawreso) {
 /* */
        this->minx = minx;

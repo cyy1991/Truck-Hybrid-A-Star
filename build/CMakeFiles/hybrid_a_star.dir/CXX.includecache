@@ -20,6 +20,26 @@ algorithm
 vector
 -
 
+.././include/grid_a_star.h
+iostream
+-
+limits
+-
+vector
+-
+queue
+-
+cmath
+-
+algorithm
+-
+matplotlibcpp.h
+-
+unordered_map
+-
+boost/heap/binomial_heap.hpp
+-
+
 .././include/kdtree.h
 stdio.h
 -
@@ -169,6 +189,8 @@ trailerlib.h
 /home/ubuntu/Truck-Hybrid-A-Star/src/trailerlib.h
 nanoflann.hpp
 /home/ubuntu/Truck-Hybrid-A-Star/src/nanoflann.hpp
+grid_a_star.h
+/home/ubuntu/Truck-Hybrid-A-Star/src/grid_a_star.h
 
 /usr/include/python3.5m/Python.h
 patchlevel.h

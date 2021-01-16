@@ -59,7 +59,7 @@ class ReedShepp {
                    double end_node[3], double step_size, 
                    ReedSheppPath* optimal_path);
 
- protected:
+ // protected:
   // Generate all possible combination of movement primitives by Reed Shepp and
   // interpolate them
   bool GenerateRSPs(double start_node[3],
