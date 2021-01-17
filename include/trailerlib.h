@@ -9,13 +9,15 @@
 #include <vector>
 #include <matplotlibcpp.h>
 // #include "kdtree.h"
+#include "kd_tree_common.h"
 
 
 using namespace std;
 namespace plt = matplotlibcpp;
 
-typedef std::vector<std::vector<double>> vector_of_vectors_t;
-// typedef KDTreeVectorOfVectorsAdaptor<vector_of_vectors_t, double> kd_tree_t;
+nanoflann::SearchParams params; 
+
+
  
 // For Collision Checking  
 struct Point {
@@ -458,6 +460,37 @@ class TruckTrailer {
 			Point ob(c * tx - s * ty, s * tx + c * ty);
 		}
 		return true;  
+
+	}
+	bool check_collision(std::vector<double> x,  std::vector<double> y, 
+			std::vector<double> yaw, const kd_tree_t& kdtree, 
+			std::vector<double> ox, std::vector<double> oy,
+			double wbd, double wbr, std::vector<double>& vrx, 
+			std::vector<double>& vry) {
+		for (int i = 0; i < x.size(); ++i) {
+			double ix = x[i], iy = y[i], iyaw = yaw[i];
+			double cx = ix + wbd * cos(iyaw);
+			double cy = iy + wbd * sin(iyaw);
+			vector<double> check_point;
+			check_point.push_back(cx);
+			check_point.push_back(cy);
+
+			std::vector<std::pair<size_t, double>> ret_obsts; 
+            // const size_t ids = kdtree.index->radiusSearch(&check_point, wbr, ret_obsts, params);
+
+			// if (ids == 0) continue;  
+
+			// for (size_t i = 0; i < ids; ++i) {
+
+			// }
+
+
+
+
+		}
+
+		return true; 
+
 
 	}
 

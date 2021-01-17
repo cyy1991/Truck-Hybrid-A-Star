@@ -4,6 +4,7 @@
 CMakeFiles/hybrid_a_star.dir/src/hybrid_a_star.cpp.o: .././include/KDTreeVectorOfVectorsAdaptor.h
 CMakeFiles/hybrid_a_star.dir/src/hybrid_a_star.cpp.o: .././include/configure.h
 CMakeFiles/hybrid_a_star.dir/src/hybrid_a_star.cpp.o: .././include/grid_a_star.h
+CMakeFiles/hybrid_a_star.dir/src/hybrid_a_star.cpp.o: .././include/kd_tree_common.h
 CMakeFiles/hybrid_a_star.dir/src/hybrid_a_star.cpp.o: .././include/kdtree.h
 CMakeFiles/hybrid_a_star.dir/src/hybrid_a_star.cpp.o: .././include/matplotlibcpp.h
 CMakeFiles/hybrid_a_star.dir/src/hybrid_a_star.cpp.o: .././include/nanoflann.hpp

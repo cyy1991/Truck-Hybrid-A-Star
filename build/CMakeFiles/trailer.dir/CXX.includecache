@@ -6,6 +6,30 @@
 
 #IncludeRegexTransform: 
 
+.././include/KDTreeVectorOfVectorsAdaptor.h
+nanoflann.hpp
+-
+vector
+-
+
+.././include/kd_tree_common.h
+nanoflann.hpp
+-
+KDTreeVectorOfVectorsAdaptor.h
+-
+iostream
+-
+algorithm
+-
+ctime
+-
+cstdlib
+-
+chrono
+-
+vector
+-
+
 .././include/matplotlibcpp.h
 vector
 -
@@ -32,6 +56,28 @@ numpy/arrayobject.h
 opencv2/opencv.hpp
 -
 
+.././include/nanoflann.hpp
+algorithm
+-
+array
+-
+cassert
+-
+cmath
+-
+cstdio
+-
+cstdlib
+-
+functional
+-
+limits
+-
+stdexcept
+-
+vector
+-
+
 .././include/trailerlib.h
 iostream
 -
@@ -41,6 +87,8 @@ vector
 -
 matplotlibcpp.h
 -
+kd_tree_common.h
+.././include/kd_tree_common.h
 
 /home/ubuntu/Truck-Hybrid-A-Star/src/trailerlib.cpp
 iostream

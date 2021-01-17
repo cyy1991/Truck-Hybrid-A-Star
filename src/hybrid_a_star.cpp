@@ -22,6 +22,7 @@
 #include "trailerlib.h"
 #include "nanoflann.hpp"
 #include "grid_a_star.h"
+#include "kd_tree_common.h"
 
 
 using namespace std;
@@ -48,7 +49,6 @@ using namespace nanoflann;
 #define LT 8.0  
 #define MAX_STEER 0.6 
 
-typedef KDTreeVectorOfVectorsAdaptor<vector_of_vectors_t, double> kd_tree_t;
 
 struct TrailerRSPathNode {
     ReedSheppPath rs_path; 
@@ -96,22 +96,22 @@ Config calc_config(std::vector<double> ox, std::vector<double>oy,
     oy.push_back(max_y_m);
 
     // the following are indices
-    double minx = std::round(min_x_m / xyreso);
-    double miny = std::round(min_y_m / xyreso);
-    double maxx = std::round(max_x_m / xyreso);
-    double maxy = std::round(max_y_m / xyreso);
+    int minx = std::round(min_x_m / xyreso);
+    int miny = std::round(min_y_m / xyreso);
+    int maxx = std::round(max_x_m / xyreso);
+    int maxy = std::round(max_y_m / xyreso);
     // width of the map
-    double xw = std::round(maxx - minx);
-    double yw = std::round(maxy - miny);
+    int xw = std::round(maxx - minx);
+    int yw = std::round(maxy - miny);
 
-    double minyaw = std::round(-M_PI / yawreso) - 1;
-    double maxyaw = std::round(M_PI / yawreso);
+    int minyaw = std::round(-M_PI / yawreso) - 1;
+    int maxyaw = std::round(M_PI / yawreso);
 
-    double yaww = std::round(maxyaw - minyaw);
+    int yaww = std::round(maxyaw - minyaw);
     
-    double minyawt = minyaw;
-    double maxyawt = maxyaw;
-    double yawtw = yaww;
+    int minyawt = minyaw;
+    int maxyawt = maxyaw;
+    int yawtw = yaww;
 
     Config config(minx, miny, minyaw, minyawt, maxx, maxy, 
                   maxyaw, maxyawt, xw, yw, yaww, yawtw, xyreso,
@@ -271,7 +271,10 @@ ReedSheppPath analytic_expantion(Node3d* current, Node3d* ngoal,
         std::cout << "Fail to generate different combination of Reed Shepp" << std::endl;
     }
     std::priority_queue<TrailerRSPathNode, std::vector<TrailerRSPathNode>, rs_path_node_cmp> pq_rspath; 
-    // pq_rspath.
+    for (ReedSheppPath path: paths) {
+
+        // vector<double> steps = MOTION_RESOLUTION * path.gear;
+    }
     
     
     return paths[0];
@@ -286,43 +289,44 @@ Node3d* calc_next_node(Node3d* current, int c_id, double u, double d, const Conf
     std::vector<double> yaw1list(nlist, 0); 
 
     xlist[1] = current->xlist.back() + d * MOTION_RESOLUTION * cos(current->yawlist.back());
-
-    // ylist[1] = current. 
+    ylist[1] = current->xlist.back() + d * MOTION_RESOLUTION * sin(current->yawlist.back());
 
 
 }
+bool isSameGrid(const Node3d& node1, const Node3d& node2) {
+    if (node1.xidx != node2.xidx) return false;  
+    if (node1.yidx != node2.yidx) return false; 
+    if (node1.yawidx != node2.yawidx) return false;  
+    return true; 
+}
 
-// bool verify_index(Node3d* node, Config c, std::vector<double> ox,
-//                   std::vector<double> oy, double inityaw1, kd_tree_t) {
-//     // overflow map 
-//     if (node.xidx - c.minx >= c.xw) {
-//         return false;
-//     } else if (node.xidx - c.minx <= 0) {
-//         return false;
-//     } else if (node.yind - c.miny >= c.yw) {
-//         return false;
-//     } else if (node.yind - c.miny <= 0) {
-//         return false;
-//     }
-//     // check collision
-//     double steps = 
-// }
-// bool update_node_with_analytic_expantion(Node3d* current, Node3d* ngoal, Config& config)
+bool verify_index(Node3d* node, Config c, std::vector<double> ox,
+                  std::vector<double> oy, double inityaw1, kd_tree_t) {
+    // overflow map 
+    if (node->xidx - c.minx >= c.xw) {
+        return false;
+    } else if (node->xidx - c.minx <= 0) {
+        return false;
+    } else if (node->yidx - c.miny >= c.yw) {
+        return false;
+    } else if (node->yidx - c.miny <= 0) {
+        return false;
+    }
+    // check collision
+    // double steps = 
+    return true; 
+}
 
-// bool CalcIdx(double x, double y, double theta, Configure& cfg, 
-//                                 int xidx, int yidx, int thidx) {
-//     double gres = cfg.xy_grid_resolution;
-//     double yawres = cfg.yaw_grid_resolution;
-//     xidx = std::ceil(x - cfg.min_x / gres);
-//     yidx = std::ceil(y - cfg.min_y / gres);
-//     double theta = mod2pi(theta); // in the range [-M_PI, M_PI]
-//     thidx = std::ceil(theta - cfg.min_yaw / yawres);
-
-//     if (xidx <= 0 || xidx > std::ceil(cfg.max_x - cfg.min_x) /gres);
-//         return false;
-//     else if ()
-    
-// }
+int calcIdx(const Node3d& node, const Config& cfg) {
+    int ind 
+        = (node.yawidx - cfg.minyaw) * cfg.xw * cfg.yw + 
+          (node.yidx - cfg.miny) * cfg.xw + (node.xidx - cfg.minx); 
+          
+    // 4D Grid 
+    int yaw1ind = std::round(node.yaw1list.back() / cfg.yawreso);
+    if (ind <= 0) std::cout << "Error [Calc Index]" << std::endl;               
+    return ind;
+}
 
 
 int main(int argc, char* argv[]) {
