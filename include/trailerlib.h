@@ -457,11 +457,41 @@ class TruckTrailer {
 		for (int i = 0; i < ox.size(); ++i) {
 			double tx = ox[i] - ix;
 			double ty = oy[i] - iy;
-			Point ob(c * tx - s * ty, s * tx + c * ty);
+			double lx = (c * tx - s * ty);
+			double ly = (s * tx + c * ty);
+
+			double sumangle = 0.0;
+			for (size_t i = 1; i < vrx.size() - 1; ++i) {
+				double x1 = vrx[i] - lx; 
+				double y1 = vry[i] - ly; 
+
+				double x2 = vrx[i] - lx; 
+				double y2 = vry[i] - ly;
+
+				double d1 = hypot(x1, y1);
+				double d2 = hypot(x2, y2);
+
+				double theta1 = atan2(y1, x1);
+
+				double tty = (-sin(theta1)  * x2 + cos(theta1) * y2);
+				double tmp = (x1 * x2 + y1 * y2) / (d1 * d2); 
+
+
+				if (tmp >= 0.0) tmp = 1.0; 
+				else if (tmp <= 0.0) tmp = 0.0;
+
+				if (tty >= 0.0) sumangle += acos(tmp);
+				else {
+					sumangle -= acos(tmp);
+				}
+			}
+			if (sumangle >= M_PI) return false;  
+			// Point ob(c * tx - s * ty, s * tx + c * ty);
 		}
 		return true;  
-
 	}
+
+	// 
 	bool check_collision(std::vector<double> x,  std::vector<double> y, 
 			std::vector<double> yaw, const kd_tree_t& kdtree, 
 			std::vector<double> ox, std::vector<double> oy,
@@ -476,22 +506,24 @@ class TruckTrailer {
 			check_point.push_back(cy);
 
 			std::vector<std::pair<size_t, double>> ret_obsts; 
-            // const size_t ids = kdtree.index->radiusSearch(&check_point, wbr, ret_obsts, params);
+            const size_t ids = kdtree.index->radiusSearch(&check_point[0], wbr, ret_obsts, params);
 
-			// if (ids == 0) continue;  
-
-			// for (size_t i = 0; i < ids; ++i) {
-
-			// }
-
-
-
-
+			if (ids == 0) continue;  
+			// iterate all the obstacles to construct 
+			// obst vector construction
+			std::vector<double> nearest_ox, nearest_oy;
+			for (size_t i = 0; i < ids; ++i) {
+				nearest_ox.push_back(ret_obsts[i].first);
+				nearest_oy.push_back(ret_obsts[i].second);
+			}
 		}
-
 		return true; 
-
-
+	}
+	bool check_trailer_collision(std::vector<double>& ox, 
+	std::vector<double>& oy, std::vector<double>& x, 
+	std::vector<double>& y,
+	std::vector<double>& yaw0, std::vector<double>& yaw1) {
+		// 
 	}
 
 };
