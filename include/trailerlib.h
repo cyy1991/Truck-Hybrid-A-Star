@@ -491,7 +491,7 @@ class TruckTrailer {
 		return true;  
 	}
 
-	// 
+	// TODO: This method is to slow
 	bool check_collision(std::vector<double> x,  std::vector<double> y, 
 			std::vector<double> yaw, const kd_tree_t& kdtree, 
 			std::vector<double> ox, std::vector<double> oy,
@@ -519,6 +519,7 @@ class TruckTrailer {
 		}
 		return true; 
 	}
+	// 
 	bool check_trailer_collision(std::vector<double>& ox, 
 	std::vector<double>& oy, std::vector<double>& x, 
 	std::vector<double>& y,

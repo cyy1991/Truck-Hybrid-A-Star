@@ -48,12 +48,6 @@ vector
 cmath
 -
 
-/home/ubuntu/Truck-Hybrid-A-Star/src/reeds_shepp_path.cpp
-reeds_shepp_path.h
-/home/ubuntu/Truck-Hybrid-A-Star/src/reeds_shepp_path.h
-iostream
--
-
 /home/ubuntu/Truck-Hybrid-A-Star/src/reeds_shepp_path_test.cpp
 reeds_shepp_path.h
 /home/ubuntu/Truck-Hybrid-A-Star/src/reeds_shepp_path.h

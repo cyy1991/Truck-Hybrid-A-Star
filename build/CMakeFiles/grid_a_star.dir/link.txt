@@ -1,1 +1,1 @@
-/usr/bin/c++    -rdynamic CMakeFiles/grid_a_star.dir/src/grid_a_star.cpp.o  -o grid_a_star -lpython3.5m 
+/usr/bin/c++  -g  -rdynamic CMakeFiles/grid_a_star.dir/src/grid_a_star.cpp.o  -o grid_a_star -lpython3.5m 

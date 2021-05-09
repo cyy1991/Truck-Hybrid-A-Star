@@ -1,1 +1,1 @@
-/usr/bin/c++    -rdynamic CMakeFiles/trailer.dir/src/trailerlib.cpp.o  -o trailer -lpython3.5m 
+/usr/bin/c++  -g  -rdynamic CMakeFiles/trailer.dir/src/trailerlib.cpp.o  -o trailer -lpython3.5m 

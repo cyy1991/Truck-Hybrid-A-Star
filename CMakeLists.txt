@@ -5,7 +5,7 @@ project(truck_trailer_hybrid_a_star)
 # yongyu.chen@tum.de  
 
 set(CMAKE_CXX_STANDARD 11)
-# set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Debug)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 

@@ -1,1 +1,1 @@
-/usr/bin/c++    -rdynamic CMakeFiles/nanoflann.dir/src/test_kdtree.cpp.o  -o nanoflann -lpython3.5m 
+/usr/bin/c++  -g  -rdynamic CMakeFiles/nanoflann.dir/src/test_kdtree.cpp.o  -o nanoflann -lpython3.5m 

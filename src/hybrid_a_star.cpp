@@ -50,6 +50,8 @@ using namespace nanoflann;
 #define MAX_STEER 0.6 
 
 
+// 使用map_server创建测试地图: https://blog.csdn.net/qq_43066145/article/details/107638543
+
 struct TrailerRSPathNode {
     ReedSheppPath rs_path; 
     double cost;
@@ -75,9 +77,9 @@ double mod2pi(double x) {
     }
     return v;  
 }
-// TODO: replace it with gridmap or costmap2d
 /**
  *@brief: contruct the obstacles map
+ *@todo: replace it with gridmap or costmap2d
  */ 
 Config calc_config(std::vector<double> ox, std::vector<double>oy, 
                    double xyreso, double yawreso) {
@@ -331,6 +333,10 @@ int calcIdx(const Node3d& node, const Config& cfg) {
 
 int main(int argc, char* argv[]) {
     std::cout << "Hybrid A star for truck trailer begins:" << std::endl;
+
+
+
+    double a = 1.0;
     double sx = 14.0, sy = 10.0; 
     return 0;
 }

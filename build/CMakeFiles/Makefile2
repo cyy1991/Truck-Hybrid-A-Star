@@ -179,10 +179,10 @@ clean: CMakeFiles/nanoflann.dir/clean
 # Target rules for target CMakeFiles/hybrid_a_star.dir
 
 # All Build rule for target.
-CMakeFiles/hybrid_a_star.dir/all: CMakeFiles/rs_path_shared.dir/all
-CMakeFiles/hybrid_a_star.dir/all: CMakeFiles/trailer_shared.dir/all
-CMakeFiles/hybrid_a_star.dir/all: CMakeFiles/grid_a_star_shared.dir/all
 CMakeFiles/hybrid_a_star.dir/all: CMakeFiles/nanoflann_shared.dir/all
+CMakeFiles/hybrid_a_star.dir/all: CMakeFiles/trailer_shared.dir/all
+CMakeFiles/hybrid_a_star.dir/all: CMakeFiles/rs_path_shared.dir/all
+CMakeFiles/hybrid_a_star.dir/all: CMakeFiles/grid_a_star_shared.dir/all
 	$(MAKE) -f CMakeFiles/hybrid_a_star.dir/build.make CMakeFiles/hybrid_a_star.dir/depend
 	$(MAKE) -f CMakeFiles/hybrid_a_star.dir/build.make CMakeFiles/hybrid_a_star.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ubuntu/Truck-Hybrid-A-Star/build/CMakeFiles --progress-num=7,8 "Built target hybrid_a_star"
