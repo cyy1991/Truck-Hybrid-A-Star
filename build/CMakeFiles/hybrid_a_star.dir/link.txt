@@ -1,1 +1,1 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/hybrid_a_star.dir/src/hybrid_a_star.cpp.o  -o hybrid_a_star -Wl,-rpath,/home/ubuntu/Truck-Hybrid-A-Star/lib -lpython3.5m ../lib/libgrid_a_star_shared.so ../lib/libnanoflann_shared.so ../lib/libtrailer_shared.so ../lib/librs_path_shared.so 
+/usr/bin/c++  -g  -rdynamic CMakeFiles/hybrid_a_star.dir/src/hybrid_a_star.cpp.o  -o hybrid_a_star -Wl,-rpath,/home/guo/new_disk_4t/Truck-Hybrid-A-Star/lib -lpython3.5m ../lib/libgrid_a_star_shared.so ../lib/libnanoflann_shared.so ../lib/libtrailer_shared.so ../lib/librs_path_shared.so 

@@ -934,17 +934,20 @@ bool ReedShepp::GenerateLocalConfigurations(
   std::vector<double> px(point_num, 0.0);
   std::vector<double> py(point_num, 0.0);
   std::vector<double> pphi(point_num, 0.0);
-  std::vector<bool> pgear(point_num, true);
+  // std::vector<bool> pgear(point_num, true);
+  std::vector<double> pgear(point_num, 1.0);
   int index = 1;
   double d = 0.0;
   double pd = 0.0;
   double ll = 0.0;
 
   if (shortest_path->segs_lengths.at(0) > 0.0) {
-    pgear.at(0) = true;
+    // pgear.at(0) = true;
+    pgear.at(1) = 1.0;
     d = step_scaled;
   } else {
-    pgear.at(0) = false;
+    // pgear.at(0) = false;
+    pgear.at(1) = -1.0; 
     d = -step_scaled;
   }
   pd = d;
@@ -1008,7 +1011,8 @@ void ReedShepp::Interpolation(const int index, const double pd, const char m,
                               const double ophi, std::vector<double>* px,
                               std ::vector<double>* py,
                               std::vector<double>* pphi,
-                              std::vector<bool>* pgear) {
+                              std::vector<double>* pgear) {
+                              // std::vector<bool>* pgear) {
   double ldx = 0.0;
   double ldy = 0.0;
   double gdx = 0.0;
@@ -1031,9 +1035,11 @@ void ReedShepp::Interpolation(const int index, const double pd, const char m,
   }
 
   if (pd > 0.0) {
-    pgear->at(index) = true;
+    // pgear->at(index) = true;
+    pgear->at(index) = 1.0;
   } else {
-    pgear->at(index) = false;
+    pgear->at(index) = -1.0;
+    // pgear->at(index) = false;
   }
 
   if (m == 'L') {

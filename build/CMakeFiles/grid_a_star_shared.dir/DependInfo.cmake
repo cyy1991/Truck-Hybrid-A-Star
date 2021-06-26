@@ -4,14 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ubuntu/Truck-Hybrid-A-Star/src/grid_a_star.cpp" "/home/ubuntu/Truck-Hybrid-A-Star/build/CMakeFiles/grid_a_star_shared.dir/src/grid_a_star.cpp.o"
+  "/home/guo/new_disk_4t/Truck-Hybrid-A-Star/src/grid_a_star.cpp" "/home/guo/new_disk_4t/Truck-Hybrid-A-Star/build/CMakeFiles/grid_a_star_shared.dir/src/grid_a_star.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "grid_a_star_shared_EXPORTS"
-  )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

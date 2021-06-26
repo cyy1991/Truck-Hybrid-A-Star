@@ -39,7 +39,8 @@ struct ReedSheppPath {
   std::vector<double> y;
   std::vector<double> phi;
   // true for driving forward and false for driving backward
-  std::vector<bool> gear;
+  // std::vector<bool> gear;
+  std::vector<double> gear; 
 };
 
 struct RSPParam {
@@ -81,7 +82,8 @@ class ReedShepp {
   void Interpolation(const int index, const double pd, const char m,
                      const double ox, const double oy, const double ophi,
                      std::vector<double>* px, std::vector<double>* py,
-                     std::vector<double>* pphi, std::vector<bool>* pgear);
+                     std::vector<double>* pphi, std::vector<double>* pgear); 
+                     // std::vector<bool>* pgear);
   // motion primitives combination setup function
   bool SetRSP(const int size, const double* lengths, const char* types,
               std::vector<ReedSheppPath>* all_possible_paths);

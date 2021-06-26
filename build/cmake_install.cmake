@@ -1,4 +1,4 @@
-# Install script for directory: /home/ubuntu/Truck-Hybrid-A-Star
+# Install script for directory: /home/guo/new_disk_4t/Truck-Hybrid-A-Star
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ubuntu/Truck-Hybrid-A-Star/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/guo/new_disk_4t/Truck-Hybrid-A-Star/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
